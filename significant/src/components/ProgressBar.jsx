@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 // ProgressBar component using Material UI LinearProgress
-const ProgressBar = ({ progress }) => {
+const ProgressBar = ({ progress = 75 }) => {
 	return (
 		<Box sx={{ width: '100%', mb: 2 }}>
 			<Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
