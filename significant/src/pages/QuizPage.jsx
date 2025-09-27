@@ -20,7 +20,21 @@ const aslQuestions = [
 
 
 const QuizPage = () => {
-  const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
+  // Flatten all words from all categories (including nested objects)
+  const flattenWords = (obj) => {
+    let arr = [];
+    Object.values(obj).forEach(val => {
+      if (Array.isArray(val)) {
+        arr = arr.concat(val);
+      } else if (typeof val === 'object' && val !== null) {
+        arr = arr.concat(flattenWords(val));
+      }
+    });
+    return arr;
+  };
+
+  const allWords = flattenWords(words);
+  const getRandomWord = () => allWords[Math.floor(Math.random() * allWords.length)];
   const [randomWord, setRandomWord] = useState(getRandomWord());
 
   const handleNewWord = () => {
