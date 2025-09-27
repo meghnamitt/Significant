@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Template from './components/Template'
-import ProgressBar from './components/ProgressBar'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import ProgressBar from './components/ProgressBar';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import QuizPage from './components/QuizPage'
+import QuizPage from './components/QuizPage';
+import HomePage from './pages/HomePage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <Router>
@@ -19,17 +19,12 @@ function App() {
           <Link to="/quiz">Quiz</Link>
         </nav>
         <Routes>
-          <Route path="/" element={
-            <>
-              <h1>Welcome to SIGNificant</h1>
-              <ProgressBar progress={50} />
-            </>
-          } />
+          <Route path="/" element={<HomePage />} />
           <Route path="/quiz" element={<QuizPage />} />
         </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
