@@ -21,7 +21,9 @@ const ReferenceSearch = () => {
     return arr;
   };
   const allWords = flattenWords(words);
-  const filteredWords = allWords.filter(word => word.toLowerCase().includes(search.toLowerCase()));
+  const filteredWords = allWords
+    .filter(word => word.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.localeCompare(b));
 
   return (
     <div style={{ maxWidth: 600, margin: '2rem auto' }}>
