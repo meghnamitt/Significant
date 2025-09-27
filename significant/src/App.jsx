@@ -15,7 +15,7 @@ function App() {
         <nav style={{ marginBottom: '1rem' }}>
           <Link to="/">Home</Link> |{' '}
           <Link to="/quiz">Quiz</Link> |{' '}
-          <Link to="/reference-search">Reference Search</Link>
+          <Link to="/reference-search">Reference Search</Link> |{' '}
           <Link to="/video-quiz">Video Quiz</Link>
         </nav>
         <Routes>
