@@ -15,12 +15,15 @@ const HomePage = () => {
     document.documentElement.style.margin = '0';
     document.documentElement.style.padding = '0';
     document.documentElement.style.boxSizing = 'border-box';
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.margin = '0';
     document.body.style.padding = '0';
-    document.body.style.width = '100vw';
-    document.body.style.height = '100vh';
-
-    // Dynamically update body text color based on theme
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+    
+    // Set body background to match theme
+    document.body.style.backgroundColor = theme === 'dark' ? '#1e293b' : '#f8fafc';
     document.body.style.color = theme === 'dark' ? '#94a3b8' : '#1e40af';
   }, [theme]);
 
@@ -65,11 +68,11 @@ const HomePage = () => {
       textAlign: 'center',
       backgroundColor: theme === 'dark' ? '#1e293b' : '#f8fafc',
       color: theme === 'dark' ? '#94a3b8' : '#1e293b',
-      width: '100%',
-      minHeight: '100vh', // full height
-      padding: '2rem 1rem', // top/bottom + sides
+      width: '100vw',
+      height: '100vh',
+      padding: '1rem', // reduced padding
       boxSizing: 'border-box', // prevent width issues
-      overflowX: 'hidden', // no horizontal scroll
+      overflow: 'auto', // allow scrolling within container if needed
       position: 'relative',
     },
   heading: {
