@@ -38,9 +38,10 @@ const HomePage = () => {
       answer: 'American Sign Language (ASL) is a visual language used by Deaf and hard-of-hearing people in the U.S. and Canada to communicate through hand signs, gestures, and facial expressions',
     },
     {
-      question: 'What is American Sign Language (ASL)?',
-      answer: 'American Sign Language (ASL) is a visual language used by Deaf and hard-of-hearing people in the U.S. and Canada to communicate through hand signs, gestures, and facial expressions',
-    },
+      question: 'Why is learning ASL important?',
+      answer: 'Learning ASL helps you communicate with the Deaf community, promotes inclusion, and connects you with more people.',
+    }
+    
   ];
 
   const toggleFAQ = (index) => {
