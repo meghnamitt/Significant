@@ -21,30 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <div>
-                <a href="https://vite.dev" target="_blank">
-                  <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                  <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-              </div>
-              <h1>Vite + React</h1>
-              <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                  count is {count}
-                </button>
-                <p>
-                  Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-              </div>
-              <Template 
-                title="My First Template"
-                onAction={() => alert("Button clicked!")}
-                actionLabel="Say Hi"
-              >
-                <p>This is some content passed as children into the Template.</p>
-              </Template>
+              <h1>Welcome to SIGNificant</h1>
+              <ProgressBar progress={50} />
             </>
           } />
           <Route path="/quiz" element={<QuizPage />} />
