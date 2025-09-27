@@ -1,5 +1,5 @@
 import React from 'react';
-import Quiz from './Quiz';
+import Quiz from '../components/Quiz';
 
 const aslQuestions = [
   {
