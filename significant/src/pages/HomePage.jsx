@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import logo_dark from '../assets/logo_dark.png';
 import logo_light from '../assets/logo_light.png';
 
@@ -221,11 +221,9 @@ const HomePage = () => {
         ))}
       <div style={{ marginTop: 20 }}>
         <Link to="/login">Login</Link>
-      <div style={{ marginTop: 24 }}>
-        <Link to="/login">Login to store your data</Link>
       </div>
     </div>
+  </div>
   );
 };
-
 export default HomePage;
