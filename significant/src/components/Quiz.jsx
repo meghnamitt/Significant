@@ -34,6 +34,7 @@ const Quiz = ({ questions, title }) => {
       {!completed ? (
         <>
           <Question
+            key={current}
             question={questions[current].question}
             options={questions[current].options}
             correctOption={questions[current].correctOption}
