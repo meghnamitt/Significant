@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo_dark from '../assets/logo_dark.png';
@@ -218,6 +219,8 @@ const HomePage = () => {
             </div>
           </div>
         ))}
+      <div style={{ marginTop: 20 }}>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );
