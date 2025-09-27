@@ -34,7 +34,7 @@ function App() {
       >
         <p>This is some content passed as children into the Template.</p>
       </Template>
-      <ProgressBar></ProgressBar>
+      <ProgressBar progress ={20}></ProgressBar>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
