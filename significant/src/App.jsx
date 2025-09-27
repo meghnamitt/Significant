@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Template from './components/Template'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,13 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+      <Template 
+        title="My First Template"
+        onAction={() => alert("Button clicked!")}
+        actionLabel="Say Hi"
+      >
+        <p>This is some content passed as children into the Template.</p>
+      </Template>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
