@@ -221,6 +221,8 @@ const HomePage = () => {
         ))}
       <div style={{ marginTop: 20 }}>
         <Link to="/login">Login</Link>
+      <div style={{ marginTop: 24 }}>
+        <Link to="/login">Login to store your data</Link>
       </div>
     </div>
   );
