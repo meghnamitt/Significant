@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Template from './components/Template'
 import ProgressBar from './components/ProgressBar'
+import Button from '@mui/material/Button'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,9 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+      <Button variant="contained" color="primary">
+        MUI Button
+      </Button>
       <Template 
         title="My First Template"
         onAction={() => alert("Button clicked!")}
