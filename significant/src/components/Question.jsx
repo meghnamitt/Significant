@@ -10,10 +10,15 @@ const Question = ({ question, options, correctOption, onAnswer }) => {
 
   const handleSelect = (index) => {
     setSelected(index);
-    setAnswered(true);
-    if (onAnswer) {
-      onAnswer(index === correctOption);
+    const isCorrect = index === correctOption;
+    
+    if (isCorrect) {
+      setAnswered(true);
+      if (onAnswer) {
+        onAnswer(true);
+      }
     }
+    // If incorrect, don't set answered to true, allowing more attempts
   };
 
   return (
@@ -23,16 +28,22 @@ const Question = ({ question, options, correctOption, onAnswer }) => {
         <Button
           key={idx}
           variant={selected === idx ? 'contained' : 'outlined'}
-          color={answered ? (idx === correctOption ? 'success' : (selected === idx ? 'error' : 'primary')) : 'primary'}
+          color={
+            answered && idx === correctOption 
+              ? 'success' 
+              : selected === idx && !answered 
+                ? 'error' 
+                : 'primary'
+          }
           onClick={() => !answered && handleSelect(idx)}
           sx={{ display: 'block', mb: 1, textAlign: 'left', width: '100%' }}
         >
           {option}
         </Button>
       ))}
-      {answered && (
+      {selected !== null && (
         <Typography variant="body2" sx={{ mt: 2 }}>
-          {selected === correctOption ? 'Correct!' : 'Try again!'}
+          {answered ? 'Correct!' : 'Try again!'}
         </Typography>
       )}
     </Box>
