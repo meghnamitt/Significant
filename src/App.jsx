@@ -26,24 +26,6 @@ function App() {
           <Link to="/quiz" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Quiz</Link>
           <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Login</Link>
           <Link to="/signup" style={{ color: 'white', textDecoration: 'none' }}>Signup</Link>
-
-import HomePage from './pages/HomePage';
-import QuizPage from './pages/QuizPage';
-import ReferenceSearch from './pages/ReferenceSearch';
-import ReferenceView from './pages/ReferenceView';
-import GTkApp from  './pages/GTKApp';
-import LoginPage from './pages/LoginPage';
-
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <nav style={{ marginBottom: '1rem' }}>
-          <Link to="/">Home</Link> |{' '}
-          <Link to="/quiz">Quiz</Link> |{' '}
-          <Link to="/reference-search">Reference Search</Link> |{' '}
-          <Link to="/gtk-app">GTk App</Link>
         </nav>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -51,10 +33,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/video" element={<VideoPage />} />
-          <Route path="/reference-search" element={<ReferenceSearch />} />
-          <Route path="/reference-view/:word" element={<ReferenceView />} />
-          <Route path="/gtk-app" element={<GTkApp />} />
-          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </Router>
