@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Quiz from '../components/Quiz';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -17,7 +18,6 @@ const aslQuestions = [
     correctOption: 0,
   },
 ];
-
 
 const QuizPage = () => {
   // Flatten all words from all categories (including nested objects)
@@ -52,10 +52,15 @@ const QuizPage = () => {
           New Word
         </Button>
       </Paper>
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <Link to="/video" style={{ textDecoration: 'none', color: 'white' }}>
+          <Button variant="contained" color="secondary">
+            Go to Video Quiz
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
-
-
 
 export default QuizPage;
