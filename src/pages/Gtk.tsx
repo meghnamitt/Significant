@@ -68,7 +68,7 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
             if (!enabled) {
                 try {
                     bufferRef.current.clear();
-                } catch (e) {
+                } catch {
                     // ignore
                 }
                 // Clear the canvas so visuals stop
@@ -224,7 +224,6 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
 
         startWebcam();
 
-        const video = videoRef.current;
         const buffer = bufferRef.current;
         const drawingUtils = drawingUtilsRef.current;
 
