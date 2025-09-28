@@ -70,8 +70,7 @@ function flattenWords(obj: any): string[] {
 }
 
 const allWords = flattenWords(words);
-declare var randOffset: number;
-randOffset = Math.floor(Math.random() * allWords.length);
+const randOffset: number = Math.floor(Math.random() * allWords.length);
 
 // Declare and initialize wordList as a string array of length 5
 const wordList: string[] = [];
