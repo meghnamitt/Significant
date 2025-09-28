@@ -219,9 +219,6 @@ const HomePage = () => {
             </div>
           </div>
         ))}
-      <div style={{ marginTop: 20 }}>
-        <Link to="/login">Login</Link>
-      </div>
     </div>
   </div>
   );
