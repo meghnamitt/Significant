@@ -44,14 +44,6 @@ const QuizPage = () => {
   return (
     <div>
       <Quiz questions={aslQuestions} title="ASL Basics Quiz" />
-      <Paper elevation={3} style={{ padding: '2rem', margin: '2rem auto', maxWidth: 400 }}>
-        <Typography variant="h4" align="center">
-          {randomWord}
-        </Typography>
-        <Button variant="contained" color="primary" onClick={handleNewWord} style={{ display: 'block', margin: '2rem auto 0' }}>
-          New Word
-        </Button>
-      </Paper>
     </div>
   );
 };
