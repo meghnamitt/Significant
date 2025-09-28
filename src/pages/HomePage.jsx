@@ -30,8 +30,8 @@ const HomePage = () => {
 
   const faqs = [
     {
-      question: 'What is SIGNificant?',
-      answer: 'SIGNificant is a platform designed to help users learn and practice sign language effectively.',
+      question: 'What is Significant?',
+      answer: 'Significant is a platform designed to help users learn and practice sign language effectively.',
     },
     {
       question: 'How do I start learning?',
@@ -162,7 +162,7 @@ const HomePage = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={{...styles.heading, fontSize: '4rem', marginBottom: '0.5rem'}}>Welcome to SIGNificant</h1>
+      <h1 style={{...styles.heading, fontSize: '4rem', marginBottom: '0.5rem'}}>Welcome to Significant</h1>
       <p style={{...styles.paragraph, fontSize: '2rem', marginTop: '0.2'}}>Your ASL learning platform</p>
       <img
       src={theme === 'dark' ? logo_dark : logo_light} // Dynamically set the logo based on the theme
