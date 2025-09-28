@@ -3,12 +3,14 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import { app } from './firebaseConfig'; // Ensure this points to your Firebase initialization file
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const LoginPage = () => {
       const user = userCredential.user;
       console.log('User logged in successfully:', user.uid);
       setMessage('Login successful! Redirecting...');
+      navigate('/');
       // Add redirection logic here if needed, e.g., using React Router
     } catch (error) {
       console.error('Login error:', error.code, error.message);

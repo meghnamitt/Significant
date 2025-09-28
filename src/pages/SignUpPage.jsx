@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from './firebaseConfig'; // Ensure this points to your Firebase initialization file
 
@@ -10,6 +11,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -25,7 +27,7 @@ const SignUpPage = () => {
       const user = userCredential.user;
       console.log('Account created successfully:', user.uid);
       setMessage('Account created successfully! You can now log in.');
-      // Optionally, redirect to the login page here
+      navigate('/login');
     } catch (error) {
       console.error('Sign-up error:', error.code, error.message);
       setMessage(`Sign-up failed: ${error.message}`);
