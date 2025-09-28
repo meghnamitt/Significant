@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
 import './GTkApp.css';
 import Gtk, { type GtkRef } from "./Gtk.tsx";
 import { useRef, useState, useEffect } from "react";
+=======
+import './GTKApp.css'
+import words from '../words.ts';
+import Gtk, {type GtkRef} from "./Gtk.tsx";
+import {useRef, useState, useEffect} from "react";
+>>>>>>> Stashed changes
 
 function GTKApp() {
     const gtkRef = useRef<GtkRef>(null);
@@ -23,6 +30,11 @@ function GTKApp() {
         setNotification(message);
     };
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     useEffect(() => {
         if (notification) {
             const timeId = setTimeout(() => {
@@ -37,6 +49,7 @@ function GTKApp() {
 
     return (
         <div className="app-container">
+<<<<<<< Updated upstream
             <header className="app-header">
                 <div className="header-content">
                     <h1 className="app-title">
@@ -49,6 +62,8 @@ function GTKApp() {
                     <span className="copyright-text">&copy; 2025 CCG @ Georgia Tech</span>
                 </div>
             </header>
+=======
+>>>>>>> Stashed changes
 
             <main className="app-main">
                 <div className="status-card">
