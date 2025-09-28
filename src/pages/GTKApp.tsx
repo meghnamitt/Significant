@@ -1,6 +1,6 @@
-import './GTkApp.css'
-import Gtk, {type GtkRef} from "./Gtk.tsx";
-import {useRef, useState, useEffect} from "react";
+import './GTkApp.css';
+import Gtk, { type GtkRef } from "./Gtk.tsx";
+import { useRef, useState, useEffect } from "react";
 
 function GTKApp() {
     const gtkRef = useRef<GtkRef>(null);
