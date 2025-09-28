@@ -1,73 +1,26 @@
-# React + TypeScript + Vite
+## Inspiration
+Most deaf children are born to hearing parents. This app helps parents learn ASL to communicate with their child, while also building the foundation for their child to connect with others.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What it does
+Our app presents one of 563 words and uses a media-pipeline ML Sign Language Recognizer to check if the user signed it correctly, helping parents practice ASL and reinforce learning.
 
-Currently, two official plugins are available:
+## How we built it
+We built the frontend using Vite + React and the backend with Firebase, hosting the app on GitHub Pages. The app leverages the Sign Language Recognizer (SLR) from PopSign Labs, powered by the GTK-Web toolkit created by Nana Gupta.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Challenges we ran into
+We faced challenges integrating the existing Git build into our frontend and handling merge conflicts between teammates. This taught us the importance of frequent commits, pulls, and clear collaboration.
 
-## React Compiler
+## Accomplishments that we're proud of
+We successfully integrated the Sign Language Recognizer (SLR) into a web-based application with a fully functional Firebase backend, creating a seamless, interactive experience for users.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## What we learned
+We gained hands-on experience with React, Vite, and Firebase, learned to integrate existing ML tools into a web app, and saw the importance of team collaboration, version control, and iterative development.
 
-## Expanding the ESLint configuration
+## What's next for Significance
+We plan to add score tracking and global highscores for all users, along with a system to save and categorize signs as “aced,” “needs practice,” or “needs studying” to personalize learning.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+https://meghnamitt.github.io/Significant/#/
+https://github.com/meghnamitt/Significant
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
