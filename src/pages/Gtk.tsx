@@ -2,7 +2,22 @@ import {FilesetResolver, HandLandmarker, DrawingUtils, type NormalizedLandmark} 
 import {useEffect, useRef, useState, forwardRef, useImperativeHandle} from "react";
 
 import * as tf from '@tensorflow/tfjs-core';
-import {TFLiteModel, loadTFLiteModel} from "@tensorflow/tfjs-tflite";
+
+// TFLite types and functions loaded from CDN
+declare global {
+    interface Window {
+        tflite: {
+            loadTFLiteModel: (url: string) => Promise<TFLiteModel>;
+        };
+    }
+    const tflite: {
+        loadTFLiteModel: (url: string) => Promise<TFLiteModel>;
+    };
+}
+
+type TFLiteModel = {
+    predict: (input: tf.Tensor) => tf.Tensor;
+};
 
 import Buffer from "./buffer.ts";
 
@@ -102,7 +117,7 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
                     runningMode: "VIDEO",
                 }
             );
-            setTfliteModel(await loadTFLiteModel('model.tflite'));
+            setTfliteModel(await tflite.loadTFLiteModel('model.tflite'));
 
             if (canvasRef.current) {
                 const ctx = canvasRef.current.getContext('2d');
@@ -260,8 +275,8 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
                 const prediction = tfliteModel.predict(inputTensor) as tf.Tensor;
                 const predictionData = Array.from(await prediction.data());
                 if (signList.length > 0) {
-                    let probs = []
-                    let labels = []
+                    let probs: number[] = []
+                    let labels: string[] = []
                     if (focusSublist.length > 0) {
                         for (let i = 0; i < predictionData.length; i++) {
                             if (focusSublist.includes(signList[i])) {

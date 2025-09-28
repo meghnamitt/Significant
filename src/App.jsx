@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
@@ -32,6 +32,7 @@ function App() {
             Welcome, {userName}!
           </div>
         )}
+        
         <nav style={{ 
           marginBottom: '1rem', 
           position: 'absolute', 
