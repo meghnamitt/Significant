@@ -130,7 +130,7 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
         }
 
         function loadSignList() {
-            return fetch('/signsList.txt')
+            return fetch('/Significant/signsList.txt')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
