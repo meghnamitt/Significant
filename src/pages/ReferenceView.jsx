@@ -5,8 +5,14 @@ import theme from '../theme';
 
 const ReferenceView = () => {
   const { word } = useParams();
-  const videoFile = `/src/ref_videos/${word}.mp4`;
+  // Use import.meta.env.BASE_URL to get the correct base path
+  const basePath = import.meta.env.BASE_URL || '/';
+  const videoFile = `${basePath}ref_videos/${word}.mp4`;
   const [videoError, setVideoError] = useState(false);
+  
+  console.log('Video path:', videoFile);
+  console.log('Base path:', basePath);
+  console.log('Word:', word);
 
   return (
     <div style={{ 
@@ -50,7 +56,13 @@ const ReferenceView = () => {
                   boxShadow: `0 8px 32px ${theme.colors.background}66`
                 }}
                 controls 
-                onError={() => setVideoError(true)}
+                onError={(e) => {
+                  console.error('Video error:', e);
+                  console.error('Failed to load:', videoFile);
+                  setVideoError(true);
+                }}
+                onLoadStart={() => console.log('Video load started')}
+                onCanPlay={() => console.log('Video can play')}
               >
                 <source src={videoFile} type="video/mp4" />
                 Your browser does not support the video tag.
@@ -73,6 +85,15 @@ const ReferenceView = () => {
                   }}
                 >
                   No reference video available yet for "{word}"
+                </Typography>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: theme.colors.textParagraph,
+                    mt: 1
+                  }}
+                >
+                  Tried to load: {videoFile}
                 </Typography>
                 <Typography 
                   variant="body2" 
