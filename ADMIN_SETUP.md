@@ -14,7 +14,7 @@ To add Lucian (or any user) as an admin in the Significant application, follow t
 Example:
 ```javascript
 const ADMIN_EMAILS = [
-  'lucian@actualdomaim.com',  // Lucian's real email
+  'lucian@actualdomain.com',  // Lucian's real email
   'admin@significant.com',    // Additional admin
   // Add more admin emails as needed
 ];
@@ -46,9 +46,9 @@ Once Lucian is added as an admin, he will have access to:
 
 ### Step 4: Testing Admin Access
 
-1. Have Lucian create an account using his email address
+1. Have Lucian create an account using his email address (via `/signup`)
 2. The system will automatically assign him admin role if his email is in the list
-3. He should see "(Admin)" next to his name when logged in
+3. After login, he should see "(Admin)" next to his name when logged in
 4. He should see the gold "Admin" link in the navigation
 5. He can access the admin dashboard at `/admin`
 
@@ -71,6 +71,15 @@ The system creates documents in the `users` collection with this structure:
 }
 ```
 
+### Firebase Configuration Required
+
+Make sure Firebase Firestore is enabled in your Firebase project:
+1. Go to Firebase Console
+2. Select your project (`significant-a7862`)
+3. Navigate to Firestore Database
+4. Create the database if not already created
+5. Set up security rules as needed
+
 ### Troubleshooting
 
 If admin access is not working:
@@ -79,3 +88,4 @@ If admin access is not working:
 2. Verify Firebase Firestore is properly configured and accessible
 3. Check browser console for any authentication or database errors
 4. Ensure Lucian is logging in with the exact email address listed as admin
+5. Verify that the Firebase project has Firestore enabled
