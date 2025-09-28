@@ -1,4 +1,5 @@
 import './GTKApp.css'
+import words from '../words.ts';
 import Gtk, {type GtkRef} from "./Gtk.tsx";
 import {useRef, useState, useEffect} from "react";
 
@@ -53,6 +54,29 @@ function GTKApp() {
             </button>
         </div>
     );
+}
+
+// Helper to flatten nested words objects (keeps same logic as other pages)
+function flattenWords(obj: any): string[] {
+        let arr: string[] = [];
+        Object.values(obj).forEach(val => {
+                if (Array.isArray(val)) {
+                        arr = arr.concat(val as string[]);
+                } else if (typeof val === 'object' && val !== null) {
+                        arr = arr.concat(flattenWords(val));
+                }
+        });
+    return arr;
+}
+
+const allWords = flattenWords(words);
+declare var randOffset: number;
+randOffset = Math.floor(Math.random() * allWords.length);
+
+// Declare and initialize wordList as a string array of length 5
+const wordList: string[] = [];
+for (let i = 0; i < 5; i++) {
+    wordList[i] = allWords[(randOffset + i) % allWords.length];
 }
 
 export default GTKApp
