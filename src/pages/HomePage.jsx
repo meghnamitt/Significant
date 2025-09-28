@@ -126,6 +126,7 @@ const HomePage = () => {
     color: theme === 'dark' ? '#e2e8f0' : '#1e293b', // Toggle button text color
     cursor: 'pointer',
     transition: 'background 0.3s',
+    marginTop: '3rem',
   },
   faqSection: {
     width: '100%',

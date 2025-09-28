@@ -6,7 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { app } from './firebaseConfig'; // Ensure this points to your Firebase initialization file
 
-const LoginPage = () => {
+const LoginPage = ({ setUserName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -21,6 +21,10 @@ const LoginPage = () => {
       const user = userCredential.user;
       console.log('User logged in successfully:', user.uid);
       setMessage('Login successful! Redirecting...');
+        // Call parent setter with the user's email if available
+        if (setUserName && user && user.email) {
+          setUserName(user.email);
+        }
       navigate('/');
       // Add redirection logic here if needed, e.g., using React Router
     } catch (error) {
