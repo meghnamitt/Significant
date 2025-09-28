@@ -6,9 +6,18 @@ import {useRef, useState, useEffect} from "react";
 function GTKApp() {
     const gtkRef = useRef<GtkRef>(null);
     const [notification, setNotification] = useState<string | null>(null);
+    const [isDetecting, setIsDetecting] = useState(false);
+    const [detectionCount, setDetectionCount] = useState(0);
 
     const handleDetect = () => {
+        setIsDetecting(true);
+        setDetectionCount(prev => prev + 1);
         gtkRef.current?.flushBuffer();
+        
+        // Reset detecting state after a short delay
+        setTimeout(() => {
+            setIsDetecting(false);
+        }, 500);
     };
 
     const showNotification = (message: string) => {
@@ -19,7 +28,7 @@ function GTKApp() {
         if (notification) {
             const timeId = setTimeout(() => {
                 setNotification(null);
-            }, 1000);
+            }, 2000);
 
             return () => {
                 clearTimeout(timeId);
@@ -29,29 +38,76 @@ function GTKApp() {
 
     return (
         <div className="app-container">
-            <h1> GTK Web Demo </h1>
-            <h3>Author, Nana Gupta. (c) 2025 by CCG @ GT</h3>
-            <p> Focus sublist filter is active for "yellow", and "dance". </p>
-            <div className="gtk-wrapper">
-                <Gtk
-                    focusSublist={['table', 'yellow']}
-                    callback={(sign) => showNotification(`Detected: ${sign}`)}
-                    ref={gtkRef}
-                />
+            <header className="app-header">
+                <div className="header-content">
+                    <h1 className="app-title">
+                        <span className="title-gradient">GTK</span> Sign Language Detection
+                    </h1>
+                    <p className="app-subtitle">Real-time American Sign Language Recognition</p>
+                </div>
+                <div className="author-info">
+                    <span className="author-text">Developed by Nana Gupta</span>
+                    <span className="copyright-text">&copy; 2025 CCG @ Georgia Tech</span>
+                </div>
+            </header>
 
-                {notification && (
-                    <div className="notification-banner">
-                        {notification}
+            <main className="app-main">
+                <div className="status-card">
+                    <div className="status-header">
+                        <div className={`status-indicator ${isDetecting ? 'detecting' : 'active'}`}></div>
+                        <span className="status-text">
+                            {isDetecting ? 'Detecting...' : 'Ready for Detection'}
+                        </span>
+                        <div className="detection-counter">
+                            <span className="counter-label">Analyses:</span>
+                            <span className="counter-value">{detectionCount}</span>
+                        </div>
                     </div>
-                )}
-            </div>
+                    <p className="filter-info">
+                        <span className="filter-label">Active Filters:</span>
+                        <span className="filter-tags">
+                            <span className="filter-tag">table</span>
+                            <span className="filter-tag">yellow</span>
+                        </span>
+                    </p>
+                </div>
 
-            <button
-                className="detect-button"
-                onClick={handleDetect}
-            >
-                <span className="button-text">Detect</span>
-            </button>
+                <div className="video-section">
+                    <div className="video-container">
+                        <div className="gtk-wrapper">
+                            <Gtk
+                                focusSublist={['table', 'yellow']}
+                                callback={(sign) => showNotification(`Detected: ${sign}`)}
+                                ref={gtkRef}
+                            />
+
+                            {notification && (
+                                <div className="notification-banner">
+                                    <div className="notification-icon">🎯</div>
+                                    <span className="notification-text">{notification}</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="controls-section">
+                        <button
+                            className={`detect-button ${isDetecting ? 'detecting' : ''}`}
+                            onClick={handleDetect}
+                            disabled={isDetecting}
+                        >
+                            <span className="button-icon">{isDetecting ? '⏳' : '🔍'}</span>
+                            <span className="button-text">
+                                {isDetecting ? 'Analyzing...' : 'Analyze Gesture'}
+                            </span>
+                        </button>
+                        
+                        <div className="help-text">
+                            <p>Position your hand in front of the camera and click "Analyze Gesture" to detect signs</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }
