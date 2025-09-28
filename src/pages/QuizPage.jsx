@@ -43,7 +43,7 @@ const QuizPage = () => {
 
   return (
     <div>
-      <Quiz questions={aslQuestions} title="ASL Basics Quiz" />
+      <Quiz questions={aslQuestions} title="Future Questions" />
     </div>
   );
 };
