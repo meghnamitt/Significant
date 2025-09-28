@@ -5,8 +5,9 @@ import Button from '@mui/material/Button';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { app } from './firebaseConfig'; // Ensure this points to your Firebase initialization file
+import { setUserRole, getUserRole, USER_ROLES } from '../utils/userRoles';
 
-const LoginPage = () => {
+const LoginPage = ({ setUserName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -20,6 +21,15 @@ const LoginPage = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User logged in successfully:', user.uid);
+      
+      // Set or update user role in Firestore
+      const userRole = await setUserRole(user.uid, user.email);
+      console.log('User role:', userRole);
+      
+      // Set the user name with role indication
+      const roleDisplay = userRole === USER_ROLES.ADMIN ? ' (Admin)' : '';
+      setUserName(user.email + roleDisplay);
+      
       setMessage('Login successful! Redirecting...');
       navigate('/');
       // Add redirection logic here if needed, e.g., using React Router

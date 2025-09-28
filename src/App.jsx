@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { app } from './pages/firebaseConfig';
+import { isUserAdmin } from './utils/userRoles';
 
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
@@ -10,9 +13,33 @@ import GTkApp from './pages/GTKApp';
 import LoginPage from './pages/LoginPage';
 import VideoPage from './pages/VideoQuiz';
 import SignupPage from './pages/SignUpPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   const [userName, setUserName] = useState(''); // State to store the logged-in user's name
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        try {
+          const adminStatus = await isUserAdmin(currentUser.uid);
+          setIsAdmin(adminStatus);
+        } catch (error) {
+          console.error('Error checking admin status:', error);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+        setUserName('');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <Router>
@@ -47,7 +74,10 @@ function App() {
           <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Login</Link>
           <Link to="/signup" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Signup</Link>
           <Link to="/reference-search" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Reference Search</Link>
-          <Link to="/gtk-app" style={{ color: 'white', textDecoration: 'none' }}>GTk App</Link>
+          <Link to="/gtk-app" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>GTk App</Link>
+          {isAdmin && (
+            <Link to="/admin" style={{ color: '#ffd700', textDecoration: 'none', fontWeight: 'bold' }}>Admin</Link>
+          )}
         </nav>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -58,6 +88,7 @@ function App() {
           <Route path="/reference-search" element={<ReferenceSearch />} />
           <Route path="/gtk-app" element={<GTkApp />} />
           <Route path="/reference-view/:word" element={<ReferenceView />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
     </Router>

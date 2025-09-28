@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from './firebaseConfig'; // Ensure this points to your Firebase initialization file
+import { setUserRole } from '../utils/userRoles';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -26,6 +27,11 @@ const SignUpPage = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('Account created successfully:', user.uid);
+      
+      // Set user role in Firestore (will automatically be admin if email is in admin list)
+      const userRole = await setUserRole(user.uid, user.email);
+      console.log('User role assigned:', userRole);
+      
       setMessage('Account created successfully! You can now log in.');
       navigate('/login');
     } catch (error) {
