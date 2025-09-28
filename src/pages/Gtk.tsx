@@ -81,9 +81,12 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
         }
     }), []);
 
+    const streamRef = useRef<MediaStream | null>(null);
+
     useEffect(() => {
         let handLandmarker: HandLandmarker | null = null;
         let animationFrameId: number;
+        let isMounted = true;
 
         async function loadLandmarker() {
             const vision = await FilesetResolver.forVisionTasks(
@@ -133,6 +136,7 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
         });
 
         const detectHands = () => {
+            if (!isMounted) return;
             if (handLandmarker && videoRef.current && canvasRef.current &&
                 videoRef.current.readyState >= 2) {
 
@@ -201,24 +205,22 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
         };
 
         const startWebcam = async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        width: 640,
-                        height: 480
-                    }
-                });
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { width: 640, height: 480 }
+        });
 
-                if (videoRef.current) {
-                    videoRef.current.srcObject = stream;
-                    videoRef.current.addEventListener('loadeddata', () => {
-                        loadLandmarker();
-                    });
-                }
-            } catch (error) {
-                console.error("Error accessing webcam:", error);
-            }
-        };
+        if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+            streamRef.current = stream;
+            videoRef.current.addEventListener('loadeddata', () => {
+                loadLandmarker();
+            });
+        }
+    } catch (error) {
+        console.error("Error accessing webcam:", error);
+    }
+};
 
         startWebcam();
 
@@ -227,13 +229,15 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
         const drawingUtils = drawingUtilsRef.current;
 
         return () => {
-            if (video && video.srcObject) {
-                const tracks = (video.srcObject as MediaStream).getTracks();
-                tracks.forEach(track => track.stop());
+            isMounted = false;
+
+            if (streamRef.current) {   // 👈 stop all tracks
+                streamRef.current.getTracks().forEach(track => track.stop());
             }
+
             if (buffer) {
-                buffer.clear()
-                buffer.clearCallbacks()
+                buffer.clear();
+                buffer.clearCallbacks();
             }
             if (handLandmarker) {
                 handLandmarker.close();
@@ -244,7 +248,7 @@ const Gtk = forwardRef<GtkRef, GtkProps>(function Gtk({style={}, callback=null, 
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
             }
-        };
+};
     }, []);
 
     useEffect(() => {
