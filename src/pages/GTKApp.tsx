@@ -15,6 +15,11 @@ function GTKApp() {
         setNotification(message);
     };
 
+    const wordList: string[] = [];
+    for (let i = 0; i < 5; i++) {
+        wordList[i] = allWords[(randOffset + i) % allWords.length];
+    }
+
     useEffect(() => {
         if (notification) {
             const timeId = setTimeout(() => {
@@ -31,10 +36,10 @@ function GTKApp() {
         <div className="app-container">
             <h1> GTK Web Demo </h1>
             <h3>Author, Nana Gupta. (c) 2025 by CCG @ GT</h3>
-            <p> Focus sublist filter is active for "yellow", and "dance". </p>
+            <p> Focus sublist filter is active for {wordList.join(", ")}. </p>
             <div className="gtk-wrapper">
                 <Gtk
-                    focusSublist={['table', 'yellow']}
+                    focusSublist={wordList}
                     callback={(sign) => showNotification(`Detected: ${sign}`)}
                     ref={gtkRef}
                 />
@@ -77,5 +82,6 @@ const wordList: string[] = [];
 for (let i = 0; i < 5; i++) {
     wordList[i] = allWords[(randOffset + i) % allWords.length];
 }
+console.log("Word list:", wordList);
 
 export default GTKApp
