@@ -1,4 +1,4 @@
-import './GTKApp.css'
+import './GTkApp.css'
 import words from '../words.ts';
 import Gtk, {type GtkRef} from "./Gtk.tsx";
 import {useRef, useState, useEffect} from "react";
