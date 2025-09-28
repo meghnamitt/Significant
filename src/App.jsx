@@ -32,6 +32,7 @@ function App() {
             Welcome, {userName}!
           </div>
         )}
+        
         <nav style={{ 
           marginBottom: '1rem', 
           position: 'absolute', 
